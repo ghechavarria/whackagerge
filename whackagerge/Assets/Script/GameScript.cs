@@ -11,6 +11,9 @@ public class GameScript : MonoBehaviour
 
     public Camera cam;
 
+    public GameObject startButton;
+    public GameObject yay;
+
     public float timeLeft;
     public Text timeText;
 
@@ -98,6 +101,8 @@ public class GameScript : MonoBehaviour
         if (timeLeft < 0){
             playing = false;
             timeLeft = 0;
+            startButton.SetActive(true);
+            yay.SetActive(true);
         }
         updateText();
         }
