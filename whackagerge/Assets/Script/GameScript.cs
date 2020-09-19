@@ -17,10 +17,16 @@ public class GameScript : MonoBehaviour
     public Text pointsText;
     private int points;
 
-    private GameObject copyofhead;
+    public GameObject copyofhead;
+    public GameObject copyoMAN;
+    public GameObject copyofLADY;
+    public GameObject copyofBUG;
 
     public GameObject head;
     private bool playing;
+
+    public GameObject cPick;
+    public int characterRIGHT;
 
     // Start is called before the first frame update
     void Start()
@@ -34,9 +40,32 @@ public class GameScript : MonoBehaviour
         float lhWidth = head.GetComponent<Renderer>().bounds.extents.x;
         maxWidth = maxWidthPosition.x - lhWidth;
         maxHeight = maxWidthPosition.y - lhWidth;
-        copyofhead = head;
+
+        cPick = GameObject.FindWithTag("Option");
+        characterRIGHT = checkChar();
         playing = true;
-        InvokeRepeating("spwGerge", 2.0f, 1f);
+
+        if (characterRIGHT == 1) {
+                copyofhead = copyoMAN;
+                InvokeRepeating("spwMAN", 2.0f, 1f);
+                //MAN
+        }
+        if (characterRIGHT == 2) {
+                copyofhead = copyofLADY;
+                InvokeRepeating("spwLADY", 2.0f, 1f);
+                //LADY
+        }
+        if (characterRIGHT == 3) {
+            copyofhead = copyofBUG;
+            InvokeRepeating("spwBUG", 2.0f, 1f);
+            //BUG
+        }
+        if (characterRIGHT == 4) {
+            copyofhead = copyofhead;
+                InvokeRepeating("spwGerge", 2.0f, 1f);
+                //GERGE
+        }
+        
 
         points = 0;
     }
@@ -88,7 +117,49 @@ public class GameScript : MonoBehaviour
         }
         
     }
+    private void spwMAN (){
+        if (playing){
+            
+            Vector3 spawnPosition = new Vector3 (Random.Range (- maxWidth , maxWidth), Random.Range( - maxHeight , maxHeight),0.0f);
+
+            Quaternion spawnRotation = Quaternion.identity;
+            Instantiate(copyofhead, spawnPosition , spawnRotation);
+            
     
+        }
+        
+    }
+    private void spwLADY (){
+        if (playing){
+            
+            Vector3 spawnPosition = new Vector3 (Random.Range (- maxWidth , maxWidth), Random.Range( - maxHeight , maxHeight),0.0f);
+
+            Quaternion spawnRotation = Quaternion.identity;
+            Instantiate(copyofhead, spawnPosition , spawnRotation);
+            
+    
+        }
+        
+    }
+    private void spwBUG (){
+        if (playing){
+            
+            Vector3 spawnPosition = new Vector3 (Random.Range (- maxWidth , maxWidth), Random.Range( - maxHeight , maxHeight),0.0f);
+
+            Quaternion spawnRotation = Quaternion.identity;
+            Instantiate(copyofhead, spawnPosition , spawnRotation);
+            
+    
+        }
+        
+    }
+    
+
+    public int checkChar(){
+        int option = cPick.GetComponent<CharacterChoice>().getChoice();
+        return option;
+    }
+        
 
 
 }
